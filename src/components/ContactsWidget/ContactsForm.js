@@ -26,9 +26,7 @@ export const ContactsForm = () => {
   const onSubmit = e => {
     e.preventDefault();
 
-    const id = nanoid();
-
-    addContact({ name, number, id });
+    addContact({ name, number });
     reset();
   };
 

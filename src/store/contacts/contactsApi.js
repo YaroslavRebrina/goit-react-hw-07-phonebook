@@ -1,25 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-// const contactsSlice = createSlice({
-//   name: 'contacts',
-//   initialState: { items: [], isLoading: false, error: null },
-//   reducers: {
-//     addContact(state, action) {
-//       if (state.items.find(contact => contact.name === action.payload.name)) {
-//         alert(`${action.payload.name} is alrady in contacts.`);
-//         return;
-//       }
-
-//       state.items.push(action.payload);
-//     },
-//     deleteContact(state, action) {
-//       state.items = state.items.filter(
-//         contact => contact.id !== action.payload
-//       );
-//     },
-//   },
-// });
-
 export const contactsApi = createApi({
   reducerPath: 'contactsApi',
   baseQuery: fetchBaseQuery({
@@ -32,16 +12,27 @@ export const contactsApi = createApi({
       providesTags: ['Contacts'],
     }),
     addContact: builder.mutation({
-      query: ({ id, name, phone }) => ({
+      query: ({ name, phone }) => ({
         url: `/contact`,
         method: 'POST',
-        body: { id, name, phone },
+        body: { name, phone },
+      }),
+      invalidatesTags: ['Contacts'],
+    }),
+    deleteContact: builder.mutation({
+      query: id => ({
+        url: `/contact/${id}`,
+        method: 'DELETE',
       }),
       invalidatesTags: ['Contacts'],
     }),
   }),
 });
 
-export const { useGetContactsQuery, useAddContactMutation } = contactsApi;
+export const {
+  useGetContactsQuery,
+  useAddContactMutation,
+  useDeleteContactMutation,
+} = contactsApi;
 // export const { addContact, deleteContact } = contactsSlice.actions;
 // export const contactReducer = contactsSlice.reducer;

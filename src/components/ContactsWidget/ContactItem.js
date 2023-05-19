@@ -1,11 +1,13 @@
 import React from 'react';
 import css from './ContactItem.module.css';
-// import PropTypes from 'prop-types';
+import { useDeleteContactMutation } from 'store/contacts/contactsApi';
+import PropTypes from 'prop-types';
 
 import { useSelector } from 'react-redux';
 
 export const ContactItem = ({ name, number, id }) => {
-  // const dispatch = useDispatch();
+  const [deleteContact] = useDeleteContactMutation();
+
   const filter = useSelector(state => state.filter);
 
   return name.toLowerCase().includes(filter.toLowerCase()) ? (
@@ -16,7 +18,7 @@ export const ContactItem = ({ name, number, id }) => {
         className={css.itemButton}
         id={id}
         type="button"
-        // onClick={() => dispatch(deleteContact(id))}
+        onClick={() => deleteContact(id)}
       >
         Delete
       </button>
@@ -24,8 +26,8 @@ export const ContactItem = ({ name, number, id }) => {
   ) : null;
 };
 
-// ContactItem.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   number: PropTypes.string.isRequired,
-//   id: PropTypes.string.isRequired,
-// };
+ContactItem.propTypes = {
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+};
