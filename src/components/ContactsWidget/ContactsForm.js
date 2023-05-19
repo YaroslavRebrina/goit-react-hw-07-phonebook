@@ -8,7 +8,7 @@ import css from './ContactsForm.module.css';
 
 export const ContactsForm = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setphone] = useState('');
   const [addContact, { isLoading }] = useAddContactMutation();
 
   const handlerInput = e => {
@@ -16,8 +16,8 @@ export const ContactsForm = () => {
       case 'name':
         setName(e.target.value);
         break;
-      case 'number':
-        setNumber(e.target.value);
+      case 'phone':
+        setphone(e.target.value);
         break;
       default:
         break;
@@ -26,18 +26,18 @@ export const ContactsForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-
-    addContact({ name, number });
+    console.log({ name, phone });
+    addContact({ name, phone });
     reset();
   };
 
   const reset = () => {
     setName('');
-    setNumber('');
+    setphone('');
   };
 
   const nameId = nanoid();
-  const numberId = nanoid();
+  const phoneId = nanoid();
 
   return (
     <>
@@ -55,20 +55,20 @@ export const ContactsForm = () => {
               value={name}
               id={nameId}
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Casnumbermore d'Artagnan"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Casphonemore d'Artagnan"
               required
             />
           </label>
 
-          <label htmlFor={numberId}>
+          <label htmlFor={phoneId}>
             <input
               className={css.input}
               onChange={handlerInput}
               placeholder="tel"
               type="tel"
-              name="number"
-              value={number}
-              id={numberId}
+              name="phone"
+              value={phone}
+              id={phoneId}
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               required
