@@ -1,9 +1,9 @@
 import React from 'react';
-import css from './ContactItem.module.css';
 import { useDeleteContactMutation } from 'store/contacts/contactsApi';
-import PropTypes from 'prop-types';
-
 import { useSelector } from 'react-redux';
+
+import PropTypes from 'prop-types';
+import css from './ContactItem.module.css';
 
 export const ContactItem = ({ name, number, id }) => {
   const [deleteContact] = useDeleteContactMutation();

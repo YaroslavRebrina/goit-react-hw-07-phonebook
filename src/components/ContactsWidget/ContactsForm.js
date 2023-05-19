@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { useAddContactMutation } from 'store/contacts/contactsApi';
+
 import { nanoid } from 'nanoid';
 import { Audio } from 'react-loader-spinner';
-import css from './ContactsForm.module.css';
 
-import { useAddContactMutation } from 'store/contacts/contactsApi';
+import css from './ContactsForm.module.css';
 
 export const ContactsForm = () => {
   const [name, setName] = useState('');
