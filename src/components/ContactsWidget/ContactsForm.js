@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { useAddContactMutation } from 'store/contacts/contactsApi';
+import {
+  useAddContactMutation,
+  useGetContactsQuery,
+} from 'store/contacts/contactsApi';
 
+import toast, { Toaster } from 'react-hot-toast';
 import { nanoid } from 'nanoid';
 import { Audio } from 'react-loader-spinner';
 
@@ -10,6 +14,7 @@ export const ContactsForm = () => {
   const [name, setName] = useState('');
   const [phone, setphone] = useState('');
   const [addContact, { isLoading }] = useAddContactMutation();
+  const { data } = useGetContactsQuery();
 
   const handlerInput = e => {
     switch (e.target.name) {
@@ -26,9 +31,18 @@ export const ContactsForm = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log({ name, phone });
-    addContact({ name, phone });
-    reset();
+
+    const isNameAlreadyTaken = data.filter(item => {
+      return item.name === name;
+    });
+
+    if (isNameAlreadyTaken.length === 0) {
+      addContact({ name, phone });
+      reset();
+      return;
+    }
+
+    toast('Contact with such name is already exist');
   };
 
   const reset = () => {
@@ -41,6 +55,7 @@ export const ContactsForm = () => {
 
   return (
     <>
+      <Toaster duration="1000" />
       {isLoading ? (
         <Audio />
       ) : (
