@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.input {
+  background: rgb(207, 231, 253);
+  border: none;
+}
+
+input:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

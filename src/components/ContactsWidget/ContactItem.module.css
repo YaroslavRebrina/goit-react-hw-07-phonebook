@@ -1,0 +1,22 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.itemChild {
+  border-right: 3px rgb(0, 0, 0) solid;
+  padding: 4px;
+}
+
+.itemButton {
+  display: inline;
+  padding: 4px;
+  border-radius: 4px;
+  border: none;
+  background: antiquewhite;
+}
+
+.itemButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
